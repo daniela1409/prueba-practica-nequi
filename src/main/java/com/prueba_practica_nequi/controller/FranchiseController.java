@@ -1,11 +1,12 @@
 package com.prueba_practica_nequi.controller;
 
-import com.prueba_practica_nequi.entity.Franchise;
+import com.prueba_practica_nequi.Exceptions.FranchiseAlreadyExistsException;
 import com.prueba_practica_nequi.model.FranchiseDTO;
 import com.prueba_practica_nequi.service.IFranchiseService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -19,7 +20,12 @@ public class FranchiseController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Franchise> createFranchise(@Valid @RequestBody FranchiseDTO franchiseDTO) {
-        return franchiseService.saveFranchise(franchiseDTO);
+    public Mono<ResponseEntity<String>> createFranchise(@Valid @RequestBody FranchiseDTO franchiseDTO) {
+        //return franchiseService.saveFranchise(franchiseDTO);
+        return franchiseService.saveFranchise(franchiseDTO)
+                .map(createdFranquicia -> ResponseEntity.ok("Franquicia creada con éxito"))
+                .onErrorResume(FranchiseAlreadyExistsException.class, e ->
+                        Mono.just(ResponseEntity.status(409).body("La franquicia con el nombre '" + franchiseDTO.getName() + "' ya existe"))
+                );
     }
 }

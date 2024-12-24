@@ -16,8 +16,24 @@ public class FranchiseService implements IFranchiseService {
     private FranchiseRepository franchiseRepository;
 
     @Override
-    public Mono<Franchise> saveFranchise(FranchiseDTO franchiseDTO) {
-        return franchiseRepository.save(new Franchise(franchiseDTO.getName()));
+    public Mono<Object> saveFranchise(FranchiseDTO franchiseDTO) {
+
+        return franchiseRepository.findByName(franchiseDTO.getName())
+                .flatMap(existingFranchise -> {
+                    return Mono.error(new FranchiseAlreadyExistsException(franchiseDTO.getName()));
+                })
+                .switchIfEmpty(
+                        franchiseRepository.save(new Franchise(franchiseDTO.getName()))
+
+                );
+
+
+        /*var some = franchiseRepository.findByName(franchiseDTO.getName());
+        var some2 = some.flatMap(existingFranchise -> {
+            return Mono.error(new FranchiseAlreadyExistsException(franchiseDTO.getName()));
+        });
+
+         */
     }
 
 

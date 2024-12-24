@@ -8,5 +8,5 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface ProductRepository extends ReactiveMongoRepository<Product, String> {
-    Mono<BranchOffice> findByNameAndBranchOfficeId(String name, String branchOfficeId);
+    Mono<Product> findByNameAndBranchOfficeId(String name, String branchOfficeId);
 }

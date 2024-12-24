@@ -6,6 +6,7 @@ import com.prueba_practica_nequi.model.ProductDTO;
 import com.prueba_practica_nequi.service.IProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
@@ -19,11 +20,26 @@ public class ProductController {
     private IProductService productService;
 
     @PostMapping("/")
-    public Mono<ResponseEntity<String>> createFranchise(@Valid @RequestBody ProductDTO productDTO) {
+    public Mono<ResponseEntity<String>> createProduct(@Valid @RequestBody ProductDTO productDTO) {
         return productService.saveProductInSucursal(productDTO)
-                .map(createdFranquicia -> ResponseEntity.ok("Producto creado con éxito en sucursal"))
-                .onErrorResume(BranchOfficeAlreadyExistsInFranchiseException.class, e ->
-                        Mono.just(ResponseEntity.status(409).body("El producto '" + productDTO.getName() + "' ya existe en sucursal ' " + productDTO.getBranchOfficeId() + "'"))
-                );
+                .map(franchise -> ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body("Producto creado con exito"));
+    }
+
+    @DeleteMapping("/{productId}")
+    public Mono<ResponseEntity<String>> deleteProduct(@PathVariable String productId) {
+        return productService.deleteProduct(productId)
+                .then(Mono.fromCallable(() -> ResponseEntity
+                        .status(HttpStatus.NO_CONTENT)
+                        .body("Producto eliminado con exito")));
+    }
+
+    @PutMapping("/")
+    public Mono<ResponseEntity<String>> UpdateProduct(@RequestBody ProductDTO productDTO) {
+        return productService.updateProductInSucursal(productDTO)
+                .map(franchise -> ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body("Producto creado con exito"));
     }
 }

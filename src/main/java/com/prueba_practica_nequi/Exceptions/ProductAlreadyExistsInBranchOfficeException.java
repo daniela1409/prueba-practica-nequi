@@ -1,7 +1,10 @@
 package com.prueba_practica_nequi.Exceptions;
 
-public class ProductAlreadyExistsInBranchOfficeException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+
+public class ProductAlreadyExistsInBranchOfficeException extends BaseApplicationException {
     public ProductAlreadyExistsInBranchOfficeException(String name, String branchOfficeId) {
-        super("El producto con el nombre '" + name + "' ya existe para sucursal '" + branchOfficeId +"'");
+        super("El producto con el nombre '" + name + "' ya existe para sucursal '" + branchOfficeId +"'",
+                HttpStatus.CONFLICT);
     }
 }

@@ -6,4 +6,6 @@ import reactor.core.publisher.Mono;
 
 public interface IProductService {
     public Mono<Product> saveProductInSucursal(ProductDTO product);
+    public Mono<Product> updateProductInSucursal(ProductDTO product);
+    public Mono<Void> deleteProduct(String id);
 }

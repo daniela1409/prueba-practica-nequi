@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
 @Repository
-public interface BranchOfficeRepository extends ReactiveCrudRepository<BranchOffice, Integer> {
+public interface BranchOfficeRepository extends ReactiveCrudRepository<BranchOffice, String> {
     Mono<BranchOffice> findByNameAndFranchiseId(String name, String franchiseId);
 }

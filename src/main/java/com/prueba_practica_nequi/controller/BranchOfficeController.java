@@ -21,11 +21,10 @@ public class BranchOfficeController {
     private IBranchOfficeService branchOfficeService;
 
     @PostMapping("/")
-    public Mono<ResponseEntity<String>> createFranchise(@Valid @RequestBody BranchOfficeDTO branchOfficeDTO) {
+    public Mono<ResponseEntity<String>> createBranchOffice(@Valid @RequestBody BranchOfficeDTO branchOfficeDTO) {
         return branchOfficeService.saveBranchOfficeByFranchise(branchOfficeDTO)
-                .map(createdFranquicia -> ResponseEntity.ok("Sucursal creada con éxito en franquicia"))
-                .onErrorResume(BranchOfficeAlreadyExistsInFranchiseException.class, e ->
-                        Mono.just(ResponseEntity.status(409).body("La sucursal '" + branchOfficeDTO.getName() + "' ya existe en franquicia ' " + branchOfficeDTO.getFranchiseId() + "'"))
-                );
+                .map(franchise -> ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body("Sucursal creada con exito"));
     }
 }

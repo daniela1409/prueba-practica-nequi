@@ -2,6 +2,7 @@ package com.prueba_practica_nequi.controller;
 
 import com.prueba_practica_nequi.Exceptions.FranchiseAlreadyExistsException;
 import com.prueba_practica_nequi.model.FranchiseDTO;
+import com.prueba_practica_nequi.model.ProductDTO;
 import com.prueba_practica_nequi.service.IFranchiseService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,13 @@ public class FranchiseController {
                 .map(franchise -> ResponseEntity
                         .status(HttpStatus.CREATED)
                         .body("Franquicia creada con exito"));
+    }
+
+    @PutMapping("/updateName/{franchiseId}")
+    public Mono<ResponseEntity<String>> UpdateNameOfProduct(@RequestBody FranchiseDTO franchiseDTO, @PathVariable String franchiseId) {
+        return franchiseService.updateFranchiseName(franchiseDTO, franchiseId)
+                .map(franchise -> ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body("Nombre de franquicia actualizado con exito"));
     }
 }

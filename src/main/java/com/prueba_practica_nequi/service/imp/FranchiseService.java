@@ -1,6 +1,9 @@
 package com.prueba_practica_nequi.service.imp;
 
+import com.prueba_practica_nequi.Exceptions.BranchOfficeNotFoundException;
 import com.prueba_practica_nequi.Exceptions.FranchiseAlreadyExistsException;
+import com.prueba_practica_nequi.Exceptions.FranchiseNotFoundException;
+import com.prueba_practica_nequi.entity.BranchOffice;
 import com.prueba_practica_nequi.entity.Franchise;
 import com.prueba_practica_nequi.model.FranchiseDTO;
 import com.prueba_practica_nequi.repository.FranchiseRepository;
@@ -23,14 +26,25 @@ public class FranchiseService implements IFranchiseService {
                     return Mono.<Franchise>error(new FranchiseAlreadyExistsException(franchiseDTO.getName()));
                 })
                 .switchIfEmpty(
-                        franchiseRepository.save(new Franchise(franchiseDTO.getName()))
-
+                        Mono.defer(() -> franchiseRepository.save(new Franchise(franchiseDTO.getName())))
                 );
     }
 
+    @Override
+    public Mono<Franchise> updateFranchiseName(FranchiseDTO franchiseDTO, String franchiseId) {
+        return franchiseRepository.findById(franchiseId)
+                .flatMap(existingFranchise -> {
+                    existingFranchise.setName(franchiseDTO.getName());
+                    return franchiseRepository.save(existingFranchise);
+                })
+                .switchIfEmpty(
+                        Mono.defer(() -> Mono.<Franchise>error(new FranchiseNotFoundException(franchiseId))
+                        ));
+    }
 
     @Override
     public Mono<Franchise> findFranchiseByName(String name) {
         return franchiseRepository.findByName(name);
     }
+
 }

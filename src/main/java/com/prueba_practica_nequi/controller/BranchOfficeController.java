@@ -4,6 +4,7 @@ import com.prueba_practica_nequi.Exceptions.BranchOfficeAlreadyExistsInFranchise
 import com.prueba_practica_nequi.Exceptions.FranchiseAlreadyExistsException;
 import com.prueba_practica_nequi.model.BranchOfficeDTO;
 import com.prueba_practica_nequi.model.FranchiseDTO;
+import com.prueba_practica_nequi.model.ProductDTO;
 import com.prueba_practica_nequi.service.IBranchOfficeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,13 @@ public class BranchOfficeController {
                 .map(franchise -> ResponseEntity
                         .status(HttpStatus.CREATED)
                         .body("Sucursal creada con exito"));
+    }
+
+    @PutMapping("/updateName/{branchOfficeId}")
+    public Mono<ResponseEntity<String>> UpdateNameOfBranchOffice(@RequestBody BranchOfficeDTO branchOfficeDTO, @PathVariable String branchOfficeId) {
+        return branchOfficeService.updateSucursalName(branchOfficeDTO, branchOfficeId)
+                .map(franchise -> ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body("Nombre de sucursal actualizado con exito"));
     }
 }

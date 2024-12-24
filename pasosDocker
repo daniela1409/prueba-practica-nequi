@@ -1,0 +1,2 @@
+1. docker build -f ./Dockerfile ./ -t prueba-nequi:v1.0
+2. docker run -d --name prueba-nequi --network xtime-net --log-opt max-size=50m -p 8080:8080 --memory=500M --memory-swap=-1 -e DB_HOST=127.0.0.1 -e DATABASE=prueba_nequi -e ENVIRONMENT=production prueba-nequi:v1.0

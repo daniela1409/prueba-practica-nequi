@@ -14,27 +14,10 @@ import reactor.core.publisher.Flux;
 import java.util.Date;
 
 @SpringBootApplication
-public class PruebaPracticaNequiApplication implements CommandLineRunner{
+public class PruebaPracticaNequiApplication{
 
-    Logger logger = LoggerFactory.getLogger(PruebaPracticaNequiApplication.class);
     public static void main(String[] args) {
         SpringApplication.run(PruebaPracticaNequiApplication.class, args);
     }
 
-    @Autowired
-    private ReactiveMongoTemplate reactiveMongoTemplate;
-
-    @Autowired
-    public ProductRepository repositoryProduct;
-    @Override
-    public void run(String... args) throws Exception {
-        reactiveMongoTemplate.dropCollection("products").subscribe();
-        Flux.just(new Product("Panasonic LCD", 900000.0),
-                        new Product("Telefono Samsung", 3000000.0),
-                        new Product("Airpods 2 generación", 800000.0))
-                .flatMap(product -> {
-                    return repositoryProduct.save(product);
-                })
-                .subscribe(product -> logger.info("Producto creado: " + product.getName()));
-    }
 }

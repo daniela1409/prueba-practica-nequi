@@ -6,6 +6,6 @@ import reactor.core.publisher.Mono;
 
 public interface IFranchiseService {
 
-    public Mono<Object> saveFranchise(FranchiseDTO franchise);
+    public Mono<Franchise> saveFranchise(FranchiseDTO franchise);
     public Mono<Franchise> findFranchiseByName(String name);
 }

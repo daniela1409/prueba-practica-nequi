@@ -18,11 +18,12 @@ public class Product {
     @Id
     private String id;
     private String name;
-    private Double stack;
+    private Integer stock;
     private String branchOfficeId;
 
-    public Product(String name, Double stack) {
+    public Product(String name, Integer stock, String branchOfficeId) {
         this.name = name;
-        this.stack = stack;
+        this.stock = stock;
+        this.branchOfficeId = branchOfficeId;
     }
 }

@@ -17,4 +17,9 @@ public class BranchOffice {
     private String id;
     private String name;
     private String franchiseId;
+
+    public BranchOffice(String franchiseId, String name) {
+        this.franchiseId = franchiseId;
+        this.name = name;
+    }
 }

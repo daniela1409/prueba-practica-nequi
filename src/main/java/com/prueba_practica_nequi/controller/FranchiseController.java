@@ -19,11 +19,9 @@ public class FranchiseController {
     private IFranchiseService franchiseService;
 
     @PostMapping("/")
-    @ResponseStatus(HttpStatus.CREATED)
     public Mono<ResponseEntity<String>> createFranchise(@Valid @RequestBody FranchiseDTO franchiseDTO) {
-        //return franchiseService.saveFranchise(franchiseDTO);
         return franchiseService.saveFranchise(franchiseDTO)
-                .map(createdFranquicia -> ResponseEntity.ok("Franquicia creada con éxito"))
+                .map(franchise -> ResponseEntity.ok("Franquicia creada con éxito"))
                 .onErrorResume(FranchiseAlreadyExistsException.class, e ->
                         Mono.just(ResponseEntity.status(409).body("La franquicia con el nombre '" + franchiseDTO.getName() + "' ya existe"))
                 );

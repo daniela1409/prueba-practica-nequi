@@ -8,9 +8,10 @@
         <version>3.4.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com</groupId>
+    <groupId>com.prueba_practica_nequi</groupId>
     <artifactId>prueba_practica_nequi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <name>prueba_practica_nequi</name>
     <description>prueba_practica_nequi</description>
     <url/>
@@ -86,14 +87,18 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.4.1</version>  <!-- Usa la versión de Spring Boot que estás utilizando -->
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
                 <configuration>
                     <archive>
-                        <manifest>
-                            <mainClass>com.prueba_practica_nequi</mainClass>
-                        </manifest>
+                        <manifestEntries>
+                            <Main-Class>com.prueba_practica_nequi.PruePracticianApplication</Main-Class> <!-- Tu clase principal -->
+                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>

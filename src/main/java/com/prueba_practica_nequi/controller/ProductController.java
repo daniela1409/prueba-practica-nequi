@@ -53,4 +53,9 @@ public class ProductController {
                         .status(HttpStatus.CREATED)
                         .body("Nombre de producto actualizado con exito"));
     }
+
+    @GetMapping("/healtCheck")
+    public ResponseEntity<String> getTopStockProductsByFranchise() {
+        return ResponseEntity.status(200).body("Todo ok");
+    }
 }

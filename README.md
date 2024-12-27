@@ -61,3 +61,16 @@ El desarrollo incluye:
    "name": "franquicia 1 editada"
    }'
 
+Como una actualización, si desea ser tomada en cuenta. Se hizo una actualización a la configuración del contenedor docker.
+Dentro del proyecto hay un archivo llamado "docker-compose.yml" en este está la configuración para dockerizar la aplicación web, como la base de datos MongoDB. 
+Para ver estos contenedores funcionando, primero, dentro del proyecto se debe correr el comando:
+
+   mvn clean package -DskipTests o mvn clean package
+
+Este comando generará el .jar necesario para que docker pueda correr la aplicación. Después de esto, solo es correr el comando:
+   
+docker-compose up --build
+
+Este comando levantará los dos contenedores, el de mongo y el de la aplicación web
+
+Y para probar los endpoints, solo se debe cambiar el puerto por el puerto 8080

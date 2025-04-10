@@ -18,7 +18,7 @@ public class Franchise {
     }
 
     @Id
-    private String id;
-    private String name;
+    String id;
+    String name;
 }
 

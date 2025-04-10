@@ -14,9 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 public class BranchOffice {
     @Id
-    private String id;
-    private String name;
-    private String franchiseId;
+    String id;
+    String name;
+    String franchiseId;
 
     public BranchOffice(String franchiseId, String name) {
         this.franchiseId = franchiseId;

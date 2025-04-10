@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BranchOfficeDTO {
-    private String name;
-    private String franchiseId;
+    String name;
+    String franchiseId;
 }

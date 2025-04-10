@@ -1,6 +1,5 @@
 Este desarrollo sigue el siguiente enunciado:
-Se requiere construir un API para manejar una lista de franquicias. Una franquicia se compone por un nombre y un listado de sucursales y, a su vez, una sucursal está compuesta por un nombre y un listado de productos ofertados en la sucursal. Un producto se componente de un
-nombre y una cantidad de stock.
+Se requiere construir un API para manejar una lista de franquicias. Una franquicia se compone por un nombre y un listado de sucursales y, a su vez, una sucursal está compuesta por un nombre y un listado de productos ofertados en la sucursal. Un producto se componente de un nombre y una cantidad de stock.
 
 Para esta API se usó JAVA 17, Springboot 3.4.1. Además, para almacenar los datos se uso una base de datos no relacional Mongodb
 
@@ -61,7 +60,7 @@ El desarrollo incluye:
    "name": "franquicia 1 editada"
    }'
 
-Como una actualización, si desea ser tomada en cuenta. Se hizo una actualización a la configuración del contenedor docker.
+Como una actualización, si desea ser tomada en cuenta. Se hizo una actualización a la configuración del contenedor Docker.
 Dentro del proyecto hay un archivo llamado "docker-compose.yml" en este está la configuración para dockerizar la aplicación web, como la base de datos MongoDB. 
 Para ver estos contenedores funcionando, primero, dentro del proyecto se debe correr el comando:
 

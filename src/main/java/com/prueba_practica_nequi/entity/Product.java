@@ -16,10 +16,10 @@ import java.util.Date;
 public class Product {
 
     @Id
-    private String id;
-    private String name;
-    private Integer stock;
-    private String branchOfficeId;
+    String id;
+    String name;
+    Integer stock;
+    String branchOfficeId;
 
     public Product(String name, Integer stock, String branchOfficeId) {
         this.name = name;

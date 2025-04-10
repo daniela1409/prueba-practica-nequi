@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FranchiseDTO {
     @NotBlank
-    private String name;
+    String name;
 }

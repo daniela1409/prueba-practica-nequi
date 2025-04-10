@@ -69,7 +69,6 @@ public class ProductService implements IProductService {
     public Flux<ProductDTO> getTopStockProductsByFranchise(String franchiseId) {
         return branchOfficeRepository.findAllByFranchiseId(franchiseId)
                 .flatMap(branchOffice -> {
-                    System.out.println("FRANCHISE: " + branchOffice.getId());
                             return productRepository.findByBranchOfficeId(branchOffice.getId())
                                     .sort((p1, p2) -> Integer.compare(p2.getStock(), p1.getStock())) // Ordenar por stock descendente
                                     .next() // Tomar el primer elemento (mayor stock)
